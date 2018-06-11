@@ -195,8 +195,8 @@ q</code></pre>
 <div id="part-3-imputing-missing-values" class="section level2">
 <h2>Part 3: Imputing Missing Values</h2>
 <p>Calculate and report the total number of missing values in the dataset (i.e. the total number of rows with NAs).</p>
-<pre class="r"><code>sum(is.na(activity$steps))</code></pre>
-<pre><code>## [1] 2304</code></pre>
+<pre class="r"><code>sum_na_activity &lt;- sum(is.na(activity$steps))</code></pre>
+<p>The total number of missing values in the dataset is: 2304</p>
 <p>The strategy used for filling in missing step values in the dataset is using the mean for that 5-minute interval.</p>
 <pre class="r"><code>avg_steps_per_int &lt;- activity_no_NA %&gt;%
   group_by(interval) %&gt;%
@@ -212,9 +212,7 @@ imp_activity_RE &lt;- imp_activity[,c(4,2,1,3)]</code></pre>
 <p>Calcuate the average number of steps taken per day.</p>
 <pre class="r"><code>sum_steps_imp &lt;- merge_imp %&gt;%
   group_by(date) %&gt;%
-  summarize(steps = sum(steps))
-as.integer(mean(sum_steps_imp$steps))</code></pre>
-<pre><code>## [1] 10749</code></pre>
+  summarize(steps = sum(steps))</code></pre>
 <p>A histogram of the total number of steps taken each day for the imputed dataset can now be created:</p>
 <pre class="r"><code>r &lt;- ggplot(sum_steps_imp, aes(x=steps)) + 
   geom_histogram(binwidth = 1000, color=&quot;white&quot;, fill=&quot;navy&quot;) +

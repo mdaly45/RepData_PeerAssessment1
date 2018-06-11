@@ -1,6 +1,6 @@
 ---
 title: "Reproducible Research, Project 1"
-output: html_document
+output: md_document
 ---
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
@@ -87,8 +87,10 @@ Int[Int$Avg==max(Int$Avg),1]
 ## Part 3: Imputing Missing Values
 Calculate and report the total number of missing values in the dataset (i.e. the total number of rows with NAs).
 ```{r, echo = TRUE}
-sum(is.na(activity$steps))
+sum_na_activity <- sum(is.na(activity$steps))
 ```
+The total number of missing values in the dataset is: `r sum_na_activity`
+
 The strategy used for filling in missing step values in the dataset is using the mean for that 5-minute interval.
 ```{r, echo = TRUE}
 avg_steps_per_int <- activity_no_NA %>%
@@ -112,7 +114,6 @@ Calcuate the average number of steps taken per day.
 sum_steps_imp <- merge_imp %>%
   group_by(date) %>%
   summarize(steps = sum(steps))
-as.integer(mean(sum_steps_imp$steps))
 ```
 A histogram of the total number of steps taken each day for the imputed dataset can now be created:
 ```{r, echo = TRUE}

@@ -123,9 +123,9 @@ Part 3: Imputing Missing Values
 Calculate and report the total number of missing values in the dataset
 (i.e. the total number of rows with NAs).
 
-    sum(is.na(activity$steps))
+    sum_na_activity <- sum(is.na(activity$steps))
 
-    ## [1] 2304
+The total number of missing values in the dataset is: 2304
 
 The strategy used for filling in missing step values in the dataset is
 using the mean for that 5-minute interval.
@@ -153,9 +153,6 @@ Calcuate the average number of steps taken per day.
     sum_steps_imp <- merge_imp %>%
       group_by(date) %>%
       summarize(steps = sum(steps))
-    as.integer(mean(sum_steps_imp$steps))
-
-    ## [1] 10749
 
 A histogram of the total number of steps taken each day for the imputed
 dataset can now be created:
